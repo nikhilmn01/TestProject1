@@ -16,6 +16,9 @@ namespace TestProject1
 
         temp_po obj = new temp_po(bd.driver);
 
+        private static readonly log4net.ILog log =log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
+
         //Practice site Register
 
         [Given(@"to register_username:""([^""]*)"" and password:""([^""]*)"" is given")]
@@ -25,6 +28,7 @@ namespace TestProject1
 
             obj.my_acc_t1.Click();
             obj.reg_email.SendKeys(reg_uname + "@test.com");
+            log.Info("******************************************kdbfksbdfkbfdkb*************************");
             obj.reg_pwd.SendKeys(reg_pwd);
         }
 
@@ -47,6 +51,7 @@ namespace TestProject1
         public void GivenUsernameAndPasswordIsGiven(string username, string password)
         {
             bd.driver.Navigate().GoToUrl(url);
+            log.Info("******************************************kdbfksbdfkbfdkb*************************");
 
             obj.my_acc_t1.Click();
             obj.uname_t1.SendKeys(username);
@@ -135,7 +140,7 @@ namespace TestProject1
         [Then(@"message should be sent successfully")]
         public void ThenMessageShouldBeSentSuccessfully()
         {
-            throw new PendingStepException();
+            Console.WriteLine("Message sent");
         }
 
 

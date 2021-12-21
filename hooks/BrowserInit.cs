@@ -17,6 +17,8 @@ namespace TestProject1.hooks
             bd.driver.Manage().Window.Maximize();
             bd.driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
 
+
+
         }
 
 

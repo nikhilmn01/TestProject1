@@ -103,7 +103,7 @@ this.ScenarioInitialize(scenarioInfo);
             {
                 this.ScenarioStart();
 #line 8
- testRunner.Given("to register_username:\"nmntest24\" and password:\"Test_at_qualitest\" is given", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.Given("to register_username:\"nmntest25\" and password:\"Test_at_qualitest\" is given", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 9
  testRunner.When("user register to the site", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");

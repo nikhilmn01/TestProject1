@@ -5,7 +5,7 @@ A short summary of the feature
 
 @tag1
 Scenario: 1 Practice site register
-	Given to register_username:"nmntest24" and password:"Test_at_qualitest" is given
+	Given to register_username:"nmntest25" and password:"Test_at_qualitest" is given
 	When user register to the site
 	Then verify the registration
 
