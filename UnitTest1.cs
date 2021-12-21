@@ -20,18 +20,18 @@ namespace TestProject1
 			IWebDriver driver = new ChromeDriver();
 			driver.Navigate().GoToUrl(url2);
 			driver.Manage().Window.Maximize();
-			driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(30);
+			driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
 
 			temp_po obj = new temp_po(driver);
 
-			obj.sigin_icon().Click();
-			obj.username().SendKeys(uname + "@outlook.com");
-			obj.uname_next().Click();
+			obj.sigin_icon.Click();
+			obj.username.SendKeys(uname + "@outlook.com");
+			obj.uname_next.Click();
             Thread.Sleep(2000);
-			obj.password().SendKeys(pwd);
-			obj.sigin_btn().Click();
-            obj.dailogue_no().Click();
-            bool flag = obj.validate_login().Displayed;
+			obj.password.SendKeys(pwd);
+			obj.sigin_btn.Click();
+            obj.dailogue_no.Click();
+            bool flag = obj.validate_login.Displayed;
             Assert.IsTrue(flag);
         }
 
