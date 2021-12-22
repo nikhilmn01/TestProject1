@@ -11,11 +11,11 @@ namespace TestProject1.consolePrograms
     { 
         public static void guess()
         {
-
             Random num = new Random();
             int val = num.Next(0, 100);
             int guessCount = 5;
             bool result = false;
+            Console.WriteLine("Welcome to number game. Press 'q' at any point in game to quit");
             Console.WriteLine("Guess a number between 0 and 100");
             do
             {
@@ -23,12 +23,25 @@ namespace TestProject1.consolePrograms
                 try
                 {
                     string parser = Console.ReadLine();
+                    if (parser == "q")
+                    {
+                        break;
+                    }
                     int guessedNum = int.Parse(parser);
 
                     if (guessCount == 1)
                     {
-                        Console.WriteLine("Actual number was "+ val);
-                        break;
+                        if (guessedNum == val)
+                        {
+                            guessCount--;
+                            break;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Actual number was " + val);
+                            break;
+                        }
+                        
                     }
 
                     if (guessedNum > val)
@@ -44,13 +57,12 @@ namespace TestProject1.consolePrograms
 
                     else if (guessedNum == val)
                     {
-                        //Console.WriteLine("actual number is " + val + " you guessed " + guessedNum);
                         result = true;
                     }
                 }
                 catch (Exception)
                 {
-                    Console.WriteLine("You did not enter a number! Please restart and enter a number");
+                    Console.WriteLine("You did not enter a number! Please enter a number");
                 }
 
             }
@@ -59,6 +71,10 @@ namespace TestProject1.consolePrograms
                 if (guessCount == 1)
                 {
                     Console.WriteLine("Too many chances were given!");
+                }
+                else if (guessCount == 0)
+                {
+                    Console.WriteLine("That was very close! got it right on the last chance!");
                 }
                 else if (result == true)
                 {

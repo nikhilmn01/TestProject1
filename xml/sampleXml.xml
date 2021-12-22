@@ -1,0 +1,14 @@
+<users>
+  <user>
+    <fName>Nikhil_New</fName>
+    <lName>M N</lName>
+    <Age>24</Age>
+    <Place>Sahakarnagar</Place>
+  </user>
+  <user>
+    <fName>Manoj</fName>
+    <lName>G</lName>
+    <Age>24</Age>
+    <Place>Yelahanka</Place>
+  </user>
+</users>

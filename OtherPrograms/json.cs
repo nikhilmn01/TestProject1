@@ -75,7 +75,7 @@ namespace TestProject1.OtherPrograms
 
             string json = File.ReadAllText("C:\\Users\\nikhil.mn\\vs-workspace\\TestProject1\\json\\sample.json");
             dynamic jsonObj = JsonConvert.DeserializeObject(json);
-            jsonObj["place"] = "New_Delhi";
+            jsonObj["Place"] = "New_Delhi";
             string output = JsonConvert.SerializeObject(jsonObj, Formatting.Indented);
             File.WriteAllText("C:\\Users\\nikhil.mn\\vs-workspace\\TestProject1\\json\\sample.json", output);
 
