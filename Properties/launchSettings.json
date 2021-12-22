@@ -1,0 +1,11 @@
+{
+  "profiles": {
+    "TestProject1": {
+      "commandName": "Project"
+    },
+    "Profile 1": {
+      "commandName": "Project",
+      "workingDirectory": "C:\\Users\\nikhil.mn\\vs-workspace\\TestProject1\\consoleprograms"
+    }
+  }
+}

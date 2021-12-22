@@ -9,7 +9,6 @@ Scenario: 1 Practice site register
 	When user register to the site
 	Then verify the registration
 
-
 @tag2
 Scenario: 2 Practice site login
 	Given username:"nmntest23" and password:"Test_at_qualitest" is given
@@ -34,7 +33,6 @@ Scenario: 5 outlook sending message scenario
 	And upon successful login
 	When user try to send the mail
 	Then message should be sent successfully
-
 
 @tag6
 Scenario: 6 outlook sending message invalid scenario

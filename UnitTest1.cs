@@ -29,6 +29,7 @@ namespace TestProject1
 			obj.uname_next.Click();
             Thread.Sleep(2000);
 			obj.password.SendKeys(pwd);
+            Console.WriteLine("asdasd");
 			obj.sigin_btn.Click();
             obj.dailogue_no.Click();
             bool flag = obj.validate_login.Displayed;
