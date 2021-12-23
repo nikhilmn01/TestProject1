@@ -29,7 +29,6 @@
 
   <ItemGroup>
     <Folder Include="EndToEndProject\features_e2e\" />
-    <Folder Include="EndToEndProject\stepDefinition_e2e\" />
     <Folder Include="Features\" />
     <Folder Include="logs\" />
     <Folder Include="xml\" />

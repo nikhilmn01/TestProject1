@@ -1,6 +1,7 @@
 ﻿using OpenQA.Selenium.Chrome;
 using System;
 using TechTalk.SpecFlow;
+using TestProject1.EndToEndProject.base_e2e;
 
 namespace TestProject1.EndToEndProject.hooks_e2e
 {
@@ -12,15 +13,15 @@ namespace TestProject1.EndToEndProject.hooks_e2e
         [BeforeScenario]
         public void BeforeScenarioWithTag()
         {
-            bd.driver = new ChromeDriver();
-            bd.driver.Manage().Window.Maximize();
-            bd.driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
+            Driver.driver = new ChromeDriver();
+            Driver.driver.Manage().Window.Maximize();
+            Driver.driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
         }
 
         [AfterScenario]
         public void AfterScenario()
         {
-            bd.driver.Close();
+            Driver.driver.Close();
         }
     }
 }

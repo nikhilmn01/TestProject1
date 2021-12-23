@@ -63,7 +63,7 @@ namespace TestProject1.EndToEndProject
         [FindsBy(How = How.XPath, Using = "//div[@id='cssmenu']/ul/li/a[text()='Blog']")]
         public IWebElement blog_tab { get; set; }
 
-        [FindsBy(How = How.XPath, Using = "//h1[text()='Blog Posts']")]
+        [FindsBy(How = How.XPath, Using = "//h2[contains(text(),'Blog Posts')]")]
         public IWebElement validate_blog { get; set; }
 
 
@@ -123,25 +123,53 @@ namespace TestProject1.EndToEndProject
         [FindsBy(How = How.XPath, Using = "//div[@class='topright']/div/p/a/img[@alt='Subscribe to my RSS Feed']")]
         public IWebElement rss_icon { get; set; }
 
-        //[FindsBy(How = How.XPath, Using = "Paste_your_XPATH_Here")]
-        //public IWebElement rss_icon_validate { get; set; }
+
+        //Individual elements
+
+
+
+        [FindsBy(How = How.XPath, Using = "//a[text()='My name is Alan Richardson. How do you want to improve?']")]
+        public IWebElement Richardson_link { get; set; }
+
+
+        [FindsBy(How = How.XPath, Using = "//p/a[text()='Join Our Email List']")]
+        public IWebElement join_email_list { get; set; }
+
+        
+
+        [FindsBy(How = How.XPath, Using = "//a[text()='EvilTester Blog']")]
+        public IWebElement evil_tester_blog { get; set; }
+
+
+        [FindsBy(How = How.XPath, Using = "//a[text()='25 Years experience']")]
+        public IWebElement experience { get; set; }
+
+        [FindsBy(How = How.XPath, Using = "//a[text()='17000+ Students taught online']")]
+        public IWebElement students_taught_online { get; set; }
+
+        
+        [FindsBy(How = How.XPath, Using = "//a[text()='4 books authored']")]
+        public IWebElement books_authored { get; set; }
+
+        // iFrames
+
+        [FindsBy(How = How.XPath, Using = "//div[@class='thumbCellSplit']//iframe")]
+        public IWebElement iframe { get; set; }
+
+
+        [FindsBy(How = How.XPath, Using = "//div/label[text()='Name']")]
+        public IWebElement name_iFrame { get; set; }
+
+        [FindsBy(How = How.XPath, Using = "//div/label[text()='Email']")]
+        public IWebElement email_iFrame { get; set; }
+
+        [FindsBy(How = How.XPath, Using = "//textarea[@name='message']")]
+        public IWebElement message_iFrame { get; set; }
 
         //[FindsBy(How = How.XPath, Using = "Paste_your_XPATH_Here")]
-        //public IWebElement Enter_your_element_name_here { get; set; }
 
-        //[FindsBy(How = How.XPath, Using = "Paste_your_XPATH_Here")]
-        //public IWebElement Enter_your_element_name_here { get; set; }
-
-        //[FindsBy(How = How.XPath, Using = "Paste_your_XPATH_Here")]
-        //public IWebElement Enter_your_element_name_here { get; set; }
-
-        //[FindsBy(How = How.XPath, Using = "Paste_your_XPATH_Here")]
-        //public IWebElement Enter_your_element_name_here { get; set; }
-
-        //[FindsBy(How = How.XPath, Using = "Paste_your_XPATH_Here")]
-
-        //[FindsBy(How = How.XPath, Using = "Paste_your_XPATH_Here")]
-        //public IWebElement Enter_your_element_name_here { get; set; }
+        [FindsBy(How = How.XPath, Using = "//div[@aria-labelledby='sendtextSpan']")]
+        public IWebElement send_iFrame { get; set; }
 
         //[FindsBy(How = How.XPath, Using = "Paste_your_XPATH_Here")]
         //public IWebElement Enter_your_element_name_here { get; set; }
