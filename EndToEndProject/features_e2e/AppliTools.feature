@@ -3,11 +3,11 @@
 A short summary of the feature
 
 
-#Scenario: Youtube Player validation
-#	Given the url of the website "https://applitools.com/"
-#	When clicked on play button of mini player
-#	When seeked to the near end of the video
-#	Then should wait until the video is completely played and should validate the same
+Scenario: 1. Youtube Player validation
+	Given the url of the website "https://applitools.com/"
+	When clicked on play button of mini player
+	When seeked to the near end of the video
+	Then should wait until the video is completely played and should validate the same
 
 Scenario: 2. Home page hover
 	Given the url of the website "https://applitools.com/"

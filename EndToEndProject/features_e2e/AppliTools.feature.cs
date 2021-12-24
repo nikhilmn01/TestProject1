@@ -74,6 +74,49 @@ namespace TestProject1.EndToEndProject.Features_E2E
         }
         
         [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("1. Youtube Player validation")]
+        public virtual void _1_YoutubePlayerValidation()
+        {
+            string[] tagsOfScenario = ((string[])(null));
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("1. Youtube Player validation", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+#line 6
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            bool isScenarioIgnored = default(bool);
+            bool isFeatureIgnored = default(bool);
+            if ((tagsOfScenario != null))
+            {
+                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((this._featureTags != null))
+            {
+                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((isScenarioIgnored || isFeatureIgnored))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 7
+ testRunner.Given("the url of the website \"https://applitools.com/\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+#line 8
+ testRunner.When("clicked on play button of mini player", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 9
+ testRunner.When("seeked to the near end of the video", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 10
+ testRunner.Then("should wait until the video is completely played and should validate the same", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("2. Home page hover")]
         public virtual void _2_HomePageHover()
         {
