@@ -24,3 +24,4 @@ The Files in the project is as follows:
 1. PageObjects.cs (contains page objects for the  task provided )
 2.SampleStepDefinition.cs (is the main step Definition file for the given task)
 3. sample.cs (to be ignored :-))
+4. ReadMe_e2e.txt is the text file that contains the description for e2e project
