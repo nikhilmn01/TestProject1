@@ -2,6 +2,7 @@
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Interactions;
+using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -144,23 +145,56 @@ namespace TestProject1.EndToEndProject.temp
             Driver.driver.FindElement(By.XPath("//button[@class='play']")).Click();
             Thread.Sleep(1000);
             Driver.driver.SwitchTo().Frame(Driver.driver.FindElement(By.XPath("//div/iframe[@title='Applitools Visual AI Overview Video']")));
+            //Driver.driver.SwitchTo().Frame(Driver.driver.FindElement(By.Id("player")));
+
+            Driver.driver.SwitchTo().Frame(Driver.driver.FindElement(By.XPath("//*[@id='player']")));
+
 
             //iframe[@id='player']
-            Driver.driver.FindElement(By.XPath("//iframe")).Click();
-            action.SendKeys(Keys.Space).Click().Perform();
-          
-            for (int act = 0; act < 30; act++)
-            {
+            //Driver.driver.FindElement(By.XPath("//iframe")).Click();
+
+            Driver.driver.FindElement(By.XPath("//button[@class='ytp-play-button ytp-button']")).Click();
+            
+            action.SendKeys(Keys.NumberPad9).Perform();
+            action.SendKeys(Keys.Space).Perform();
+
+            WebDriverWait wait = new WebDriverWait(Driver.driver, TimeSpan.FromSeconds(15));
+
+            wait.Until(driver => Driver.driver.FindElement(By.XPath("//button[@aria-label='Replay']")).Displayed);
+
+            //Thread.Sleep(15000);
+            //Driver.driver.FindElement(By.XPath("//button[@aria-label='Replay']"));
+            Assert.IsTrue(Driver.driver.FindElement(By.XPath("//button[@aria-label='Replay']")).Displayed);
+
+            //action.SendKeys(Keys.).Click().Perform();
+
+            //Actions action2 = new Actions(Driver.driver);
+
+            //IWebElement ele = Driver.driver.FindElement(By.XPath("//div[@class='ytp-scrubber-container']"));
+            
+            ////div[@class='ytp-progress-bar-container']
+            //int xcord = ele.Location.X;
+            //int ycord = ele.Location.Y;
+  
+            ////action2.MoveByOffset(300, 457).Perform();
+            //action2.MoveByOffset(xcord + 180, ycord).Perform();
+            ////Thread.Sleep(5000);
+            //action2.Click();
+            //action.SendKeys(Keys.NumberPad9).Click().Perform();
+
+            //for (int act = 0; act < 30; act++)
+            //{
                 
-                action.SendKeys(Keys.Right).Click().Perform();
+            //    action.SendKeys(Keys.ArrowRight).Click().Perform();
 
-            }
-            Thread.Sleep(1000);
-            action.SendKeys(Keys.Space).Click().Perform();
+            //}
+            //Thread.Sleep(1000);
+            //action.SendKeys(Keys.Space).Click().Perform();
             Driver.driver.SwitchTo().DefaultContent();
-            
 
             
+
+
             //for (int req = 0; req < nav.Count; req++) 
             //{
             //    string reqNav = nav[req];
@@ -171,7 +205,7 @@ namespace TestProject1.EndToEndProject.temp
             //    if (reqNav != nav[3])
             //    {
 
-                
+
             //    var ele = Driver.driver.FindElements(By.XPath("//a[text()='" + reqNav + "']/parent::li/ul/li"));
 
             //        for (int i = 0; i < ele.Count; i++)
@@ -194,7 +228,7 @@ namespace TestProject1.EndToEndProject.temp
             //        Console.WriteLine("There is no sub elements to validate");
             //    }
             //}
-           
+
             Thread.Sleep(2000);
             Driver.driver.Close();
         }

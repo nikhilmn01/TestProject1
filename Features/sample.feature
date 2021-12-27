@@ -40,3 +40,4 @@ Scenario: 6 outlook sending message invalid scenario
 	And upon successful login
 	When user try to send the mail without recepient email id
 	Then error message should be shown successfully
+

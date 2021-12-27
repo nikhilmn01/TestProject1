@@ -1,6 +1,15 @@
 {
+  "Age": "24",
+  //"email": [
+  //  "jd@example.com",
+  //  "jd@example.org",
+  //  "test@abc.com",
+  //  "hsbhb",
+  //  "ashbdjkabd",
+  //  "asdbjkabd",
+  //  "dkbkd"
+  //],
   "fName": "Nikhil",
   "lName": "M N",
-  "Age": "24",
   "Place": "New_Delhi"
 }

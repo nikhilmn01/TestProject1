@@ -1,0 +1,42 @@
+{
+  "products": [
+    "Platform Overview",
+    "Eyes",
+    "Ultrafast Test Cloud",
+    "SDKs & Integrations"
+  ],
+  "resources": [
+    "SDK Tutorials",
+    "Support",
+    "Learn",
+    "Blog",
+    "Webinars & Events",
+    "Case Studies",
+    "Test Automation University",
+    "What’s New",
+    "Open Source"
+  ],
+  "use_case": [
+    "Functional Testing",
+    "Visual Testing",
+    "Web Testing",
+    "Mobile Testing",
+    "Regression Testing",
+    "Cross Browser Testing",
+    "Responsive Design Testing",
+    "Storybook Testing",
+    "PDF Testing",
+    "Localization Testing",
+    "Compliance Testing",
+    "Accessibility Testing",
+    "Codeless Testing"
+  ],
+  "company": [
+    "About Us",
+    "News",
+    "Our Customers",
+    "Awards",
+    "Careers",
+    "Contact Us"
+  ]
+}

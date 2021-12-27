@@ -18,11 +18,12 @@ namespace TestProject1.OtherPrograms
         [Test]
         public static void jsonProg()
         {
-            WriteFile();
-            LoadFile();
-            Console.WriteLine("********************************");
-            update();
-            LoadFile();
+            //WriteFile();
+            //LoadFile();
+            //Console.WriteLine("********************************");
+            //update();
+            //LoadFile();
+            read();
 
         }
 
@@ -81,6 +82,23 @@ namespace TestProject1.OtherPrograms
 
         }
 
+
+        public static void read()
+        {
+            var r = "C:\\Users\\nikhil.mn\\vs-workspace\\TestProject1\\json\\sample.json";
+            var e2ePath = @"C:\Users\nikhil.mn\vs-workspace\TestProject1\json\e2e_validate.json";
+            dynamic jsonFile = JsonConvert.DeserializeObject(File.ReadAllText(e2ePath));
+            var list = jsonFile["resources"];
+            string dummy = "abcsgvg"; 
+            
+            foreach (var item in list)
+            {
+                string abc = item.ToString();
+                Assert.IsFalse(dummy == abc);
+                Console.WriteLine(item);
+            }
+            //Console.WriteLine(jsonFile["email"]);
+        }
     }
 }
 

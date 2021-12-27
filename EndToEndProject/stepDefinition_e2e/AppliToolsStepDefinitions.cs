@@ -1,10 +1,14 @@
+using Newtonsoft.Json;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
+using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Threading;
 using TechTalk.SpecFlow;
+using TechTalk.SpecFlow.Assist;
 using TestProject1.EndToEndProject.base_e2e;
 using TestProject1.EndToEndProject.pageObjects_e2e;
 
@@ -30,45 +34,66 @@ namespace TestProject1
         {
            obj.play_btn.Click();
             Thread.Sleep(1000);
-            Driver.driver.SwitchTo().Frame(obj.iFrame_main);
-            
+            //Driver.driver.SwitchTo().Frame(obj.iFrame_main);
+            //Driver.driver.FindElement(By.XPath("//button[@class='play']")).Click();
+            //Thread.Sleep(1000);
+
         }
 
         [When(@"seeked to the near end of the video")]
         public void WhenSeekedToTheNearEndOfTheVideo()
         {
-            obj.iFrame_sub.Click();
-            action.SendKeys(Keys.Space).Click().Perform();
+            Driver.driver.SwitchTo().Frame(Driver.driver.FindElement(By.XPath("//div/iframe[@title='Applitools Visual AI Overview Video']")));
+            Driver.driver.SwitchTo().Frame(Driver.driver.FindElement(By.XPath("//*[@id='player']")));
 
-            for (int act = 0; act < 30; act++)
-            {
+            Driver.driver.FindElement(By.XPath("//button[@class='ytp-play-button ytp-button']")).Click();
+            action.SendKeys(Keys.NumberPad9).Perform();
+            action.SendKeys(Keys.Space).Perform();
 
-                action.SendKeys(Keys.Right).Click().Perform();
+            
 
-            }
+            //IWebElement ele = Driver.driver.FindElement(By.XPath("//div[@class='ytp-scrubber-container']"));
+
+            //int xcord = ele.Location.X;
+            //int ycord = ele.Location.Y;
+
+            //action.MoveByOffset(150, ycord).Perform();
+            //Thread.Sleep(1000);
+            //action.Click();
+
+            //obj.iFrame_sub.Click();
+            //action.SendKeys(Keys.Space).Click().Perform();
+
+            //for (int act = 0; act < 30; act++)
+            //{
+
+            //    action.SendKeys(Keys.Right).Click().Perform();
+
+            //}
             
         }
 
         [Then(@"should wait until the video is completely played and should validate the same")]
         public void ThenShouldWaitUntilTheVideoIsCompletelyPlayedAndShouldValidateTheSame()
         {
-            Thread.Sleep(1000);
-            action.SendKeys(Keys.Space).Click().Perform();
+            WebDriverWait wait = new WebDriverWait(Driver.driver, TimeSpan.FromSeconds(15));
+
+            wait.Until(driver => Driver.driver.FindElement(By.XPath("//button[@aria-label='Replay']")).Displayed);
+
+            //Thread.Sleep(15000);
+            //Driver.driver.FindElement(By.XPath("//button[@aria-label='Replay']"));
+            Assert.IsTrue(Driver.driver.FindElement(By.XPath("//button[@aria-label='Replay']")).Displayed);
             Driver.driver.SwitchTo().DefaultContent();
         }
-
-
         //Navigation Bar validation
 
         [When(@"hovered on the navigation bar and validated the same")]
         public void WhenHoveredOnTheNavigationBarAndValidatedTheSame()
         {
             List<string> nav = new List<string> { "Products", "Use Cases", "Resources", "Pricing", "Company" };
-            List<string> Products_validation = new List<string> { "Platform Overview", "Eyes", "Ultrafast Test Cloud", "SDKs & Integrations" };
-            List<string> Resources_validation = new List<string> { "SDK Tutorials","Support","Learn","Blog","Webinars & Events","Case Studies","Test Automation University","What’s New","Open Source"};
-            List<string> Use_cases_validation = new List<string> {"Functional Testing","Visual Testing","Web Testing","Mobile Testing","Regression Testing","Cross Browser Testing","Responsive Design Testing","Storybook Testing","PDF Testing","Localization Testing","Compliance Testing","Accessibility Testing","Codeless Testing"};
-            List<string> Company_validation = new List<string> { "About Us","News","Our Customers","Awards","Careers","Contact Us"};
-            
+            var e2ePath = @"C:\Users\nikhil.mn\vs-workspace\TestProject1\json\e2e_validate.json";
+            dynamic jsonFile = JsonConvert.DeserializeObject(File.ReadAllText(e2ePath));
+
             for (int req = 0; req < nav.Count; req++)
             {
                 string reqNav = nav[req];
@@ -86,19 +111,27 @@ namespace TestProject1
                         {
                             var splitString = all1.Split("\r");
                             all1 = splitString[0];
-                            Assert.IsTrue(all1 == Products_validation[i]);
+                            var list = jsonFile["products"];
+                            string temp = list[i].ToString();
+                            Assert.IsTrue(all1 == temp);
                         }
                         else if (reqNav == nav[1])
                         {
-                            Assert.IsTrue(all1 == Use_cases_validation[i]);
+                            var list = jsonFile["use_case"];
+                            string temp = list[i].ToString();
+                            Assert.IsTrue(all1 == temp);
                         }
                         else if (reqNav == nav[2])
                         {
-                            Assert.IsTrue(all1 == Resources_validation[i]);
+                            var list = jsonFile["resources"];
+                            string temp = list[i].ToString();
+                            Assert.IsTrue(all1 == temp);
                         }
-                        else if (reqNav == nav[2])
+                        else if (reqNav == nav[4])
                         {
-                            Assert.IsTrue(all1 == Use_cases_validation[i]);
+                            var list = jsonFile["company"];
+                            string temp = list[i].ToString();
+                            Assert.IsTrue(all1 == temp);
                         }
                         Console.WriteLine(all1);
 
@@ -108,6 +141,8 @@ namespace TestProject1
                 {
                     Console.WriteLine("There is no sub elements to validate");
                 }
+
+                
             }
         }
 
@@ -158,8 +193,6 @@ namespace TestProject1
                 string temp = splitString[i];
                 Console.WriteLine(splitString[i]);
             }
-
-         
         }
 
         [Then(@"successful logout should happen")]
@@ -169,6 +202,59 @@ namespace TestProject1
             obj.logout.Click();
         }
 
+        [When(@"hovered on the navigation bar item ""([^""]*)"" and validated the same")]
+        public void WhenHoveredOnTheNavigationBarItemAndValidatedTheSame(string products)
+        {
+            
+            var e2ePath = @"C:\Users\nikhil.mn\vs-workspace\TestProject1\json\e2e_validate.json";
+            dynamic jsonFile = JsonConvert.DeserializeObject(File.ReadAllText(e2ePath));
+
+            string reqNav = products;
+                action.MoveToElement(Driver.driver.FindElement(By.XPath("//a[text()='" + reqNav + "']"))).Perform();
+
+                if (reqNav != "Pricing")
+                {
+                    var ele = Driver.driver.FindElements(By.XPath("//a[text()='" + reqNav + "']/parent::li/ul/li"));
+
+                    for (int i = 0; i < ele.Count; i++)
+                    {
+
+                        String all1 = ele[i].Text;
+                        if (reqNav == "Products")
+                        {
+                            var splitString = all1.Split("\r");
+                            all1 = splitString[0];
+                            var list = jsonFile["products"];
+                            string temp = list[i].ToString();
+                            Assert.IsTrue(all1 == temp);
+                        }
+                        else if (reqNav == "Use Cases")
+                        {
+                            var list = jsonFile["use_case"];
+                            string temp = list[i].ToString();
+                            Assert.IsTrue(all1 == temp);
+                        }
+                        else if (reqNav == "Resources")
+                        {
+                            var list = jsonFile["resources"];
+                            string temp = list[i].ToString();
+                            Assert.IsTrue(all1 == temp);
+                        }
+                        else if (reqNav == "Company")
+                        {
+                            var list = jsonFile["company"];
+                            string temp = list[i].ToString();
+                            Assert.IsTrue(all1 == temp);
+                        }
+                        Console.WriteLine(all1);
+
+                    }
+                }
+                else if (reqNav == "Pricing")
+                {
+                    Console.WriteLine("There is no sub elements to validate");
+                }    
+        }
 
 
     }
