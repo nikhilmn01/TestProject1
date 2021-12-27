@@ -23,8 +23,16 @@ namespace TestProject1.EndToEndProject.pageObjects_e2e
         [FindsBy(How = How.XPath, Using = "//div/iframe[@title='Applitools Visual AI Overview Video']")]
         public IWebElement iFrame_main { get; set; }
 
-        [FindsBy(How = How.XPath, Using = "//iframe")]
+        [FindsBy(How = How.XPath, Using = "//*[@id='player']")]
         public IWebElement iFrame_sub { get; set; }
+
+        [FindsBy(How = How.XPath, Using = "//button[@class='ytp-play-button ytp-button']")]
+        public IWebElement iFrame_sub_play { get; set; }
+
+        [FindsBy(How = How.XPath, Using = "//button[@aria-label='Replay']")]
+        public IWebElement iFrame_sub_replay { get; set; }
+
+        //div[@class='scrollable-menu']
 
         [FindsBy(How = How.XPath, Using = "//a[text()='Login']")]
         public IWebElement login_icon { get; set; }
@@ -73,9 +81,6 @@ namespace TestProject1.EndToEndProject.pageObjects_e2e
         [FindsBy(How = How.XPath, Using = "//div[@class='icon ai ai-chevron-down dropdown-icon']")]
         public IWebElement dropdown_arrow { get; set; }
 
-     
-        [FindsBy(How = How.XPath, Using = " //div[@class='scrollable-menu']")]
-        public IWebElement dropdown_list { get; set; }
 
 
 

@@ -19,6 +19,7 @@ namespace TestProject1
     {
         Actions action = new Actions(Driver.driver);
         AppliTools_PageObjects obj = new AppliTools_PageObjects(Driver.driver);
+        WebDriverWait wait = new WebDriverWait(Driver.driver, TimeSpan.FromSeconds(15));
 
 
         //YouTube Player Validation
@@ -33,59 +34,40 @@ namespace TestProject1
         public void WhenClickedOnPlayButtonOfMiniPlayer()
         {
            obj.play_btn.Click();
-            Thread.Sleep(1000);
-            //Driver.driver.SwitchTo().Frame(obj.iFrame_main);
-            //Driver.driver.FindElement(By.XPath("//button[@class='play']")).Click();
-            //Thread.Sleep(1000);
-
+           Thread.Sleep(1000);
         }
 
         [When(@"seeked to the near end of the video")]
         public void WhenSeekedToTheNearEndOfTheVideo()
         {
-            Driver.driver.SwitchTo().Frame(Driver.driver.FindElement(By.XPath("//div/iframe[@title='Applitools Visual AI Overview Video']")));
-            Driver.driver.SwitchTo().Frame(Driver.driver.FindElement(By.XPath("//*[@id='player']")));
+            Driver.driver.SwitchTo().Frame(obj.iFrame_main);
+            Driver.driver.SwitchTo().Frame(obj.iFrame_sub);
 
-            Driver.driver.FindElement(By.XPath("//button[@class='ytp-play-button ytp-button']")).Click();
+            obj.iFrame_sub_play.Click();
             action.SendKeys(Keys.NumberPad9).Perform();
             action.SendKeys(Keys.Space).Perform();
-
-            
 
             //IWebElement ele = Driver.driver.FindElement(By.XPath("//div[@class='ytp-scrubber-container']"));
 
             //int xcord = ele.Location.X;
             //int ycord = ele.Location.Y;
 
-            //action.MoveByOffset(150, ycord).Perform();
+            //action.MoveByOffset(350, ycord).Perform();
             //Thread.Sleep(1000);
             //action.Click();
-
-            //obj.iFrame_sub.Click();
-            //action.SendKeys(Keys.Space).Click().Perform();
-
-            //for (int act = 0; act < 30; act++)
-            //{
-
-            //    action.SendKeys(Keys.Right).Click().Perform();
-
-            //}
             
         }
 
         [Then(@"should wait until the video is completely played and should validate the same")]
         public void ThenShouldWaitUntilTheVideoIsCompletelyPlayedAndShouldValidateTheSame()
         {
-            WebDriverWait wait = new WebDriverWait(Driver.driver, TimeSpan.FromSeconds(15));
-
-            wait.Until(driver => Driver.driver.FindElement(By.XPath("//button[@aria-label='Replay']")).Displayed);
-
-            //Thread.Sleep(15000);
-            //Driver.driver.FindElement(By.XPath("//button[@aria-label='Replay']"));
-            Assert.IsTrue(Driver.driver.FindElement(By.XPath("//button[@aria-label='Replay']")).Displayed);
+            wait.Until(driver => obj.iFrame_sub_replay.Displayed);
+            Assert.IsTrue(obj.iFrame_sub_replay.Displayed);
             Driver.driver.SwitchTo().DefaultContent();
         }
-        //Navigation Bar validation
+
+
+        //Navigation Bar validation (all in one)
 
         [When(@"hovered on the navigation bar and validated the same")]
         public void WhenHoveredOnTheNavigationBarAndValidatedTheSame()
@@ -133,23 +115,77 @@ namespace TestProject1
                             string temp = list[i].ToString();
                             Assert.IsTrue(all1 == temp);
                         }
-                        Console.WriteLine(all1);
 
                     }
                 }
                 else if (reqNav == nav[3])
                 {
-                    Console.WriteLine("There is no sub elements to validate");
+                    Console.WriteLine("There is no sub elements in pricing to validate");
                 }
 
                 
             }
         }
 
+        //Navigation bar validation (individual)
+
+        [When(@"hovered on the navigation bar item ""([^""]*)"" and validated the same")]
+        public void WhenHoveredOnTheNavigationBarItemAndValidatedTheSame(string products)
+        {
+
+            var e2ePath = @"C:\Users\nikhil.mn\vs-workspace\TestProject1\json\e2e_validate.json";
+            dynamic jsonFile = JsonConvert.DeserializeObject(File.ReadAllText(e2ePath));
+
+            string reqNav = products;
+            action.MoveToElement(Driver.driver.FindElement(By.XPath("//a[text()='" + reqNav + "']"))).Perform();
+
+            if (reqNav != "Pricing")
+            {
+                var ele = Driver.driver.FindElements(By.XPath("//a[text()='" + reqNav + "']/parent::li/ul/li"));
+
+                for (int i = 0; i < ele.Count; i++)
+                {
+
+                    String all1 = ele[i].Text;
+                    if (reqNav == "Products")
+                    {
+                        var splitString = all1.Split("\r");
+                        all1 = splitString[0];
+                        var list = jsonFile["products"];
+                        string temp = list[i].ToString();
+                        Assert.IsTrue(all1 == temp);
+                    }
+                    else if (reqNav == "Use Cases")
+                    {
+                        var list = jsonFile["use_case"];
+                        string temp = list[i].ToString();
+                        Assert.IsTrue(all1 == temp);
+                    }
+                    else if (reqNav == "Resources")
+                    {
+                        var list = jsonFile["resources"];
+                        string temp = list[i].ToString();
+                        Assert.IsTrue(all1 == temp);
+                    }
+                    else if (reqNav == "Company")
+                    {
+                        var list = jsonFile["company"];
+                        string temp = list[i].ToString();
+                        Assert.IsTrue(all1 == temp);
+                    }
+
+                }
+            }
+            else if (reqNav == "Pricing")
+            {
+                Console.WriteLine("There is no sub elements to validate");
+            }
+        }
+
         [Then(@"there should be no error in validation")]
         public void ThenThereShouldBeNoErrorInValidation()
         {
-            Console.WriteLine("Validation successful");
+            Console.WriteLine("Navigation Bar Validation successful");
         }
 
         //UL elements validation
@@ -185,7 +221,7 @@ namespace TestProject1
             obj.message_send_icon.Click();
 
             obj.dropdown_arrow.Click();
-            var dropdownList = Driver.driver.FindElements(By.XPath(" //div[@class='scrollable-menu']"));
+            var dropdownList = Driver.driver.FindElements(By.XPath("//div[@class='scrollable-menu']"));
             var splitString = dropdownList[0].Text.Split("\r\n");
 
             for (int i=0;i<dropdownList.Count;i++)
@@ -201,61 +237,5 @@ namespace TestProject1
             obj.profile_Btn.Click();
             obj.logout.Click();
         }
-
-        [When(@"hovered on the navigation bar item ""([^""]*)"" and validated the same")]
-        public void WhenHoveredOnTheNavigationBarItemAndValidatedTheSame(string products)
-        {
-            
-            var e2ePath = @"C:\Users\nikhil.mn\vs-workspace\TestProject1\json\e2e_validate.json";
-            dynamic jsonFile = JsonConvert.DeserializeObject(File.ReadAllText(e2ePath));
-
-            string reqNav = products;
-                action.MoveToElement(Driver.driver.FindElement(By.XPath("//a[text()='" + reqNav + "']"))).Perform();
-
-                if (reqNav != "Pricing")
-                {
-                    var ele = Driver.driver.FindElements(By.XPath("//a[text()='" + reqNav + "']/parent::li/ul/li"));
-
-                    for (int i = 0; i < ele.Count; i++)
-                    {
-
-                        String all1 = ele[i].Text;
-                        if (reqNav == "Products")
-                        {
-                            var splitString = all1.Split("\r");
-                            all1 = splitString[0];
-                            var list = jsonFile["products"];
-                            string temp = list[i].ToString();
-                            Assert.IsTrue(all1 == temp);
-                        }
-                        else if (reqNav == "Use Cases")
-                        {
-                            var list = jsonFile["use_case"];
-                            string temp = list[i].ToString();
-                            Assert.IsTrue(all1 == temp);
-                        }
-                        else if (reqNav == "Resources")
-                        {
-                            var list = jsonFile["resources"];
-                            string temp = list[i].ToString();
-                            Assert.IsTrue(all1 == temp);
-                        }
-                        else if (reqNav == "Company")
-                        {
-                            var list = jsonFile["company"];
-                            string temp = list[i].ToString();
-                            Assert.IsTrue(all1 == temp);
-                        }
-                        Console.WriteLine(all1);
-
-                    }
-                }
-                else if (reqNav == "Pricing")
-                {
-                    Console.WriteLine("There is no sub elements to validate");
-                }    
-        }
-
-
     }
 }

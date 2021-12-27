@@ -9,10 +9,10 @@ Scenario: 1. Youtube Player validation
 	When seeked to the near end of the video
 	Then should wait until the video is completely played and should validate the same
 
-#Scenario: 2. Home page hover
-#	Given the url of the website "https://applitools.com/"
-#	When hovered on the navigation bar and validated the same
-#	Then there should be no error in validation
+Scenario: 2. Home page hover
+	Given the url of the website "https://applitools.com/"
+	When hovered on the navigation bar and validated the same
+	Then there should be no error in validation
 
 Scenario: 3. Login page multiple ui elements to be validated 
 	Given the url of the website "https://applitools.com/"
