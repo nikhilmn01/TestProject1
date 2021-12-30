@@ -23,7 +23,8 @@ namespace TestProject1.EndToEndProject.temp
         {
             //tabsValidation();
             //iconValidation();
-            youtubePlayer();
+            //youtubePlayer();
+            bitCoinGraph();
         }
         public void tabsValidation()
         {
@@ -150,11 +151,23 @@ namespace TestProject1.EndToEndProject.temp
             Driver.driver.SwitchTo().Frame(Driver.driver.FindElement(By.XPath("//*[@id='player']")));
 
 
+
+            
+
             //iframe[@id='player']
             //Driver.driver.FindElement(By.XPath("//iframe")).Click();
 
             Driver.driver.FindElement(By.XPath("//button[@class='ytp-play-button ytp-button']")).Click();
-            
+
+            IWebElement ele = Driver.driver.FindElement(By.XPath("//div[@class='ytp-scrubber-container']"));
+
+            int xcord = ele.Location.X;
+            int ycord = ele.Location.Y;
+
+            action.MoveByOffset(350, ycord).Perform();
+            Thread.Sleep(1000);
+            action.Click();
+
             action.SendKeys(Keys.NumberPad9).Perform();
             action.SendKeys(Keys.Space).Perform();
 
@@ -231,6 +244,58 @@ namespace TestProject1.EndToEndProject.temp
 
             Thread.Sleep(2000);
             Driver.driver.Close();
+        }
+        
+        public void bitCoinGraph()
+        {
+            Driver.driver = new ChromeDriver();
+            Driver.driver.Manage().Window.Maximize();
+            Driver.driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(20);
+            Driver.driver.Navigate().GoToUrl("https://www.coindesk.com/price/bitcoin/");
+
+            Actions action = new Actions(Driver.driver);
+
+            IWebElement element = Driver.driver.FindElement(By.XPath("(//*[local-name()='svg']//*[@class='highcharts-series highcharts-series-0 highcharts-area-series'])[1]"));
+            //X and Y co-ordinates to hover through the graph
+            int Y = ((element.Size.Height) / 2);
+            int X = ((element.Size.Width) / 2);
+            string date = "30 ";
+            string month = "Dec 2021";
+            string time = " 03:08";
+            string time2 = " 03:09";
+            string input = date.Trim()+" Dec 2021, "+time.Trim()+" GMT+5:30";
+            string inputA = date.Trim() + " "+month.Trim()+", " + time.Trim() + " GMT+5:30";
+            string inputB = date.Trim() + " " + month.Trim() + ", " + time2.Trim() + " GMT+5:30";
+            string input2 = date.Trim() + " Dec 2021, " + time2.Trim() + " GMT+5:30";
+            string compare = "30 Dec 2021, 03:08 GMT+5:30";
+            string compare2 = "30 Dec 2021, 03:09 GMT+5:30";
+            bool flag = (compare == inputA || inputB == compare2);
+
+            Driver.driver.FindElement(By.XPath("//*[local-name()='svg']//*[@class='highcharts-series highcharts-series-0 highcharts-area-series']")).Click();
+
+            for (int i = 0; i < element.Size.Width; i++)
+            {
+
+                action.MoveToElement(element, X + i, Y + i).Perform();
+                string data = Driver.driver.FindElement(By.XPath("//div[@class=('highcharts-label highcharts-tooltip chart-tooltip highcharts-color-undefined')]/span/span[@class='date']")).Text;
+                if (data == input || data == input2)
+                {
+                    Console.WriteLine(Driver.driver.FindElement(By.XPath("//div[@class=('highcharts-label highcharts-tooltip chart-tooltip highcharts-color-undefined')]/span/span[@class='price']")).Text);
+                    break;
+                }
+                //if(data == test1.ToString("d MMM yyyy, HH:mm 'GMT+5:30'"))
+                //{
+                //    Console.WriteLine(driver.FindElement(By.XPath("//div[@class=('highcharts-label highcharts-tooltip chart-tooltip highcharts-color-undefined')]/span/span[@class='price']")).Text);
+                //    break;
+                //}
+
+            }
+
+            Driver.driver.Close();
+
+
+
+
         }
     }
 }

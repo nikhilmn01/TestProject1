@@ -52,7 +52,7 @@ namespace TestProject1
             //int xcord = ele.Location.X;
             //int ycord = ele.Location.Y;
 
-            //action.MoveByOffset(350, ycord).Perform();
+            //action.MoveByOffset(350, ycord).Click().Perform();
             //Thread.Sleep(1000);
             //action.Click();
             
