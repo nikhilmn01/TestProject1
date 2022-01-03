@@ -259,10 +259,10 @@ namespace TestProject1.EndToEndProject.temp
             //X and Y co-ordinates to hover through the graph
             int Y = ((element.Size.Height) / 2);
             int X = ((element.Size.Width) / 2);
-            string date = "30 ";
-            string month = "Dec 2021";
-            string time = " 03:08";
-            string time2 = " 03:09";
+            string date = "2 ";
+            string month = "Jan 2022";
+            string time = " 22:14";
+            string time2 = " 22:15";
             string input = date.Trim()+" Dec 2021, "+time.Trim()+" GMT+5:30";
             string inputA = date.Trim() + " "+month.Trim()+", " + time.Trim() + " GMT+5:30";
             string inputB = date.Trim() + " " + month.Trim() + ", " + time2.Trim() + " GMT+5:30";
@@ -278,7 +278,7 @@ namespace TestProject1.EndToEndProject.temp
 
                 action.MoveToElement(element, X + i, Y + i).Perform();
                 string data = Driver.driver.FindElement(By.XPath("//div[@class=('highcharts-label highcharts-tooltip chart-tooltip highcharts-color-undefined')]/span/span[@class='date']")).Text;
-                if (data == input || data == input2)
+                if (data == inputA || data == inputB)
                 {
                     Console.WriteLine(Driver.driver.FindElement(By.XPath("//div[@class=('highcharts-label highcharts-tooltip chart-tooltip highcharts-color-undefined')]/span/span[@class='price']")).Text);
                     break;
