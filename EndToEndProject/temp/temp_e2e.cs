@@ -1417,39 +1417,6 @@ namespace TestProject1.EndToEndProject.temp
 
             }
 
-            void goInAvailablePaths()
-            {
-                foreach (var path in availablePaths)
-                {
-
-                    lbcLastIndex = lastButtonClicked.Count - 1;
-                    if ((path == "right") && (lastButtonClicked[lbcLastIndex] != "left"))
-                    {
-                        right();
-
-                        break;
-                    }
-
-                    else if (path == "left" && (lastButtonClicked[lbcLastIndex] != "right"))
-                    {
-                        left();
-                        break;
-                    }
-
-                    else if (path == "up" && (lastButtonClicked[lbcLastIndex] != "down"))
-                    {
-                        up();
-                        break;
-                    }
-                    else if (path == "down" && (lastButtonClicked[lbcLastIndex] != "up"))
-                    {
-                        down();
-                        break;
-                    }
-
-                }
-            }
-
             void keepTrackAndGoInAvailablePaths()
             {
                 foreach (var path in availablePaths)
@@ -1546,37 +1513,35 @@ namespace TestProject1.EndToEndProject.temp
                     obtainAvailablePaths();
                     if (c > 2)
                     {
-                        reversePath.Clear();
-
                         //it is a junction
+                        reversePath.Clear();
                         do
                         {
                             obtainAvailablePaths();
 
                             if (c == 2)
                             {
+                                //Not a Junction, Just the regular path
                                 keepTrackAndGoInAvailablePaths();
-
                             }
 
                             else if (c > 2 && loopCounter == 501)
                             {
+                                //This loop is used to terminate the current junction and start over
                                 loopCounter = 201;
                                 break;
-
                             }
 
                             else if (c > 2)
                             {
+                                //Junstion inside a junction found
                                 keepTrackAndGoInAvailablePaths();
                                 loopCounter = 501;
-
                             }
 
                             else if (c == 1)
                             {
-                                //dead end
-
+                                //Reached the dead end
                                 deadEndFound();
                                 loopCounter = 201;
                             }
@@ -1586,7 +1551,7 @@ namespace TestProject1.EndToEndProject.temp
                     else if (c == 2)
                     {
                         //it is not a junction
-                        goInAvailablePaths();
+                        keepTrackAndGoInAvailablePaths();
                     }
                     else if (c == 1)
                     {
@@ -1602,8 +1567,5 @@ namespace TestProject1.EndToEndProject.temp
                 Driver.driver.Close();
             }
         }
-
-
-
     }
 }
