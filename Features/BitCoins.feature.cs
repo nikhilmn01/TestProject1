@@ -104,7 +104,7 @@ this.ScenarioInitialize(scenarioInfo);
 testRunner.Given("When user enters the url = \"https://www.coindesk.com/price/bitcoin/\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 5
-testRunner.When("user hovers over the graph at date = \"2 Jan 2022\" and time = \"22:16\" or \"22.15\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+testRunner.When("user hovers over the graph at date = \"2 Jan 2022\" and time = \"23:58\" or \"23.59\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 6
 testRunner.Then("should get the appropriate price at that point", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");

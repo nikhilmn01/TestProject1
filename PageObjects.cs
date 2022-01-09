@@ -95,10 +95,26 @@ namespace TestProject1
 		[FindsBy(How = How.XPath, Using = "//input[@name='register']")]
 		public IWebElement reg_btn { get; set; }
 
-		//This is just to make the copy pasting easy
-		//[FindsBy(How = How.XPath, Using = "hdbfhsbdifbsihbsdfhb")]
-		//public IWebElement sdabfiusbdfbsdfuibysu { get; set; }
+
+		//BitCoin Graph
+
+        [FindsBy(How = How.XPath, Using = "//*[local-name()='svg']//*[@class='highcharts-series highcharts-series-0 highcharts-area-series'])[1]")]
+        public IWebElement BitCoinElement { get; set; }
+
+        [FindsBy(How = How.XPath, Using = "//*[local-name()='svg']//*[@class='highcharts-series highcharts-series-0 highcharts-area-series']")]
+        public IWebElement svgGraph_Hover_bitCoin { get; set; }
+
+        [FindsBy(How = How.XPath, Using = "//div[@class=('highcharts-label highcharts-tooltip chart-tooltip highcharts-color-undefined')]/span/span[@class='date']")]
+        public IWebElement svg_graphTable_bitCoin { get; set; }
 
 
-	}
+        [FindsBy(How = How.XPath, Using = "//div[@class=('highcharts-label highcharts-tooltip chart-tooltip highcharts-color-undefined')]/span/span[@class='price']")]
+        public IWebElement svg_price_bitCoin { get; set; }
+
+        //This is just to make the copy pasting easy
+        //[FindsBy(How = How.XPath, Using = "hdbfhsbdifbsihbsdfhb")]
+        //public IWebElement sdabfiusbdfbsdfuibysu { get; set; }
+
+
+    }
 }
