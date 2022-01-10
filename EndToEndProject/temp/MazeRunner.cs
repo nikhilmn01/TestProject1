@@ -23,6 +23,16 @@ namespace TestProject1.EndToEndProject.temp
             Driver.driver.Manage().Window.Maximize();
             Driver.driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(4);
 
+            Driver.driver.Navigate().GoToUrl("http://127.0.0.1:8080/");
+
+            //webElements are defined below and not used paje object model just to put this code under single class
+
+            IWebElement rightBtn = Driver.driver.FindElement(By.XPath("//button[text()='Right']"));
+            IWebElement leftBtn = Driver.driver.FindElement(By.XPath("//button[text()='Left']"));
+            IWebElement upBtn = Driver.driver.FindElement(By.XPath("//button[text()='Up']"));
+            IWebElement downBtn = Driver.driver.FindElement(By.XPath("//button[text()='Down']"));
+
+
             //global declarations
             int clmNum;
             int rwNum;
@@ -110,47 +120,47 @@ namespace TestProject1.EndToEndProject.temp
 
             }
 
-            //main Buttons
+            //main Buttons - it is used to click and store the value so that the current cell should not travel backwrds
 
             void right()
             {
-                Driver.driver.FindElement(By.XPath("//button[text()='Right']")).Click();
+                rightBtn.Click();
                 lastButtonClicked.Add("right");
             }
             void left()
             {
-                Driver.driver.FindElement(By.XPath("//button[text()='Left']")).Click();
+                leftBtn.Click();
                 lastButtonClicked.Add("left");
             }
             void up()
             {
-                Driver.driver.FindElement(By.XPath("//button[text()='Up']")).Click();
+                upBtn.Click();
                 lastButtonClicked.Add("up");
             }
             void down()
             {
-                Driver.driver.FindElement(By.XPath("//button[text()='Down']")).Click();
+                downBtn.Click();
                 lastButtonClicked.Add("down");
             }
 
-            // dry buttons
+            // dry buttons - it is used to click on the button and not store the value clicked (just to traverse back to the last saved checkpoint)
 
             void right1()
             {
-                Driver.driver.FindElement(By.XPath("//button[text()='Right']")).Click();
+                rightBtn.Click();
             }
             void left1()
             {
-                Driver.driver.FindElement(By.XPath("//button[text()='Left']")).Click();
+                leftBtn.Click();
             }
             void up1()
             {
-                Driver.driver.FindElement(By.XPath("//button[text()='Up']")).Click();
+                upBtn.Click();
 
             }
             void down1()
             {
-                Driver.driver.FindElement(By.XPath("//button[text()='Down']")).Click();
+                downBtn.Click();
             }
 
             //obtain the available direction to travel
@@ -264,8 +274,9 @@ namespace TestProject1.EndToEndProject.temp
 
             //**********Functions End**********//
 
-            Driver.driver.Navigate().GoToUrl("http://127.0.0.1:8080/");
-            Driver.driver.FindElement(By.XPath("//button[text()='Right']")).Click();
+            
+            //Driver.driver.FindElement(By.XPath("//button[text()='Right']")).Click();
+            rightBtn.Click();
 
             try
             {
