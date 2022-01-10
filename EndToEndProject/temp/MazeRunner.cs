@@ -153,6 +153,8 @@ namespace TestProject1.EndToEndProject.temp
                 Driver.driver.FindElement(By.XPath("//button[text()='Down']")).Click();
             }
 
+            //obtain the available direction to travel
+
             List<string> obtainAvailablePaths()
             {
                 c = 0;
@@ -175,6 +177,7 @@ namespace TestProject1.EndToEndProject.temp
 
             }
 
+            //Traverse in the selected direction and keep track of it
             void keepTrackAndGoInAvailablePaths()
             {
                 foreach (var path in availablePaths)
@@ -209,6 +212,7 @@ namespace TestProject1.EndToEndProject.temp
                 }
             }
 
+            //This function defines what has to be done if a dead end is found
             void deadEndFound()
             {
                 deadEnd = true;
